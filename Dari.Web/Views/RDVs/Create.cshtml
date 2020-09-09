@@ -1,0 +1,120 @@
+﻿@model Dari.Domain.Entities.RDV
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+
+
+
+<!-- Property Details Hero Section Begin -->
+<section class="pd-hero-section set-bg" data-setbg="../Content/Front/img/properties/product-content-bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="pd-hero-text">
+                    <p class="room-location"><i class="icon_pin"></i> 9721 Glen Creek Ave. Ballston Spa, NY</p>
+                    <h2>Villa 9721 Glen Creek</h2>
+                    <div class="room-price">
+                        <span>Start Form:</span>
+                        <p>$3.000.000</p>
+                    </div>
+                    <ul class="room-features">
+                        <li>
+                            <i class="fa fa-arrows"></i>
+                            <p>5201 sqft</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-bed"></i>
+                            <p>8 Bed Room</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-bath"></i>
+                            <p>7 Baths Bed</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-car"></i>
+                            <p>1 Garage</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="property-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pd-details-text">
+                    <div class="property-contactus">
+                        <h4>Contact Us</h4>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="agent-desc">
+                                    <img src="img/properties/agent-contact.jpg" alt="">
+                                    <div class="agent-title">
+                                        <h5>Adam Smith</h5>
+                                        <span>Saler Marketing</span>
+                                    </div>
+                                    <div class="agent-social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-envelope"></i></a>
+                                    </div>
+                                    <p>
+                                        In today’s net-savvy world it has become common for any business to have a
+                                        website which they use mostly for advertising their products and services.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 offset-lg-1">
+                                @using (Html.BeginForm("Create", "RDVs", new { annonceId = @ViewBag.annonceId }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "agent-contact-form", @placeholder = "Date" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+                                        <h4>RDV</h4>
+                                        <hr />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            <label>Date Rendez Vous</label>
+                                            @Html.TextBoxFor(model => model.date, new { @class = "form-control", type = "datetime-local", placeholder = "Enter Date here..." })
+                                            @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <button type="submit" class="site-btn">Demande Rendez Vous</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.9/datepicker.min.js"></script>
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+</script>
+}

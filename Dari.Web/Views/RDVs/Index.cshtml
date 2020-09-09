@@ -1,0 +1,101 @@
+﻿@using Dari.Domain.Entities ;
+@model IEnumerable<Dari.Domain.Entities.RDV>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+
+
+
+
+<section class="blog-section latest-blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span>List Rendez Vous</span>
+                    <h2>Liste Rendez Vous</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                        <th>
+                           Nom Annonce
+                        </th>
+                        <th>
+                            Nom Visiteur
+                        </th>
+                        <th>
+                            Nom Vendeur
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.state)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.annonce.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.visiteur.Nom) @Html.DisplayFor(modelItem => item.visiteur.Prenom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.annonce.client.Nom) @Html.DisplayFor(modelItem => item.annonce.client.Prenom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.state)
+                            </td>
+                            
+                                @if (item.state.ToString() == "demand")
+                                {
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                        @Html.ActionLink("Accept RDV", "Accept", new { rdvID = item.id }) |
+                                        @Html.ActionLink("Refus RDV", "Refus", new { rdvID = item.id }) |
+                                    </td>
+                                }
+                                @if (item.state.ToString() == "accepted")
+                                {
+                                     <td>
+                                        @Html.ActionLink("Cancel RDV", "Cancel", new { rdvID = item.id })
+                                     </td>
+                               }
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        </div>
+</section>
+
+@section scripts {
+    <script src="~/Content/Front/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Front/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- page script -->
+    <script>
+                        $(function () {
+                            $('#example1').DataTable({
+                                "paging": true,
+                                "lengthChange": true,
+                                "searching": true,
+                                "ordering": true,
+                                "info": true,
+                                "autoWidth": true,
+                            });
+                        });
+    </script>
+}

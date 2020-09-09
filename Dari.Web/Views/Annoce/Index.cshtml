@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Dari.Domain.Entities.Annonce>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+
+}
+
+
+<section class="feature-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span>Listing From Our Agents</span>
+                    <h2>Featured Properties</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="feature-carousel owl-carousel">
+                @foreach (var item in Model)
+            {
+                    <div class="col-lg-4">
+                        <div class="feature-item">
+                            <div class="fi-pic set-bg" data-setbg="../Content/Front/img/feature/feature-1.jpg">
+                                <div class="pic-tag">
+                                    <div class="f-text">feauture</div>
+                                    <div class="s-text">For Sale</div>
+                                </div>
+                                <div class="feature-author">
+                                    <div class="fa-pic">
+                                        <img src="~/Content/Front/img/feature/f-author-1.jpg" alt="">
+                                    </div>
+                                    <div class="fa-text">
+                                        <span>@Html.DisplayFor(modelItem => item.client.Nom) @Html.DisplayFor(modelItem => item.client.Prenom)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fi-text">
+                                <div class="inside-text">
+                                    <h4>@Html.DisplayFor(modelItem => item.Description)</h4>
+                                    <ul>
+                                        <li><i class="fa fa-map-marker"></i> @Html.DisplayFor(modelItem => item.address)</li>
+                                        <li><i class="fa fa-tag"></i> Villa</li>
+                                    </ul>
+                                    <h5 class="price">$5900<span>/month</span></h5>
+                                    @Html.ActionLink("Prendre Rendez Vous", "Create", "RDVs", new { annonceId = @item.AnnonceId }, new { @class = "property-sub", @style = "display: inline-block; background: #2CBDB8; font-size: 14px; color: #ffffff; padding: 20px 30px;" })
+
+                                </div>
+                                <ul class="room-features">
+                                    <li>
+                                        <i class="fa fa-arrows"></i>
+                                        <p>@Html.DisplayFor(modelItem => item.surface) sqft</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bed"></i>
+                                        <p>@Html.DisplayFor(modelItem => item.chambres)</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bath"></i>
+                                        <p>3</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-car"></i>
+                                        <p>2</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
